@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Cookie King 🍪 | Royal Motion Edition</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:'Poppins',sans-serif;
+  color:#4b2e05;
+  scroll-behavior:smooth;
+  overflow-x:hidden;
+  position:relative;
+  min-height:100vh;
+}
+/* animated multi-color diagonal lines background */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:repeating-linear-gradient(
+    135deg,
+    #ff9a9e 0%, #ff9a9e 10%, #fad0c4 10%, #fad0c4 20%,
+    #fcb69f 20%, #fcb69f 30%, #a1c4fd 30%, #a1c4fd 40%,
+    #c2e9fb 40%, #c2e9fb 50%, #fbc2eb 50%, #fbc2eb 60%,
+    #ffd6a5 60%, #ffd6a5 70%, #b8f2e6 70%, #b8f2e6 80%,
+    #d9a7c7 80%, #d9a7c7 90%, #fffcdc 90%, #fffcdc 100%
+  );
+  background-size:400% 400%;
+  animation:moveLines 25s linear infinite;
+  opacity:0.34;
+  z-index:-1;
+}
+@keyframes moveLines{0%{background-position:0% 0%}50%{background-position:100% 100%}100%{background-position:0% 0%}}
+
+/* header */
+header{
+  background:linear-gradient(90deg,#fff8e1,#ffd54f,#ffb300,#ffcc80);
+  background-size:300% 300%;
+  animation:shine 8s ease infinite;
+  text-align:center;
+  padding:1rem;
+  font-size:1.8rem;
+  font-weight:700;
+  color:#5a3600;
+  text-shadow:0 0 12px #ffd54f,0 0 20px #ffb300;
+  position:sticky;top:0;z-index:10;
+  border-bottom:3px solid #ffb300;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+}
+@keyframes shine{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+/* collage 2x2 */
+.collage{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:25px;
+  padding:50px 25px 20px 25px;
+  justify-items:center;
+}
+.collage img{
+  width:100%;
+  max-width:500px;
+  height:230px;
+  border-radius:20px;
+  object-fit:cover;
+  box-shadow:0 8px 25px rgba(0,0,0,0.25);
+  transition:transform .4s ease,box-shadow .4s ease;
+}
+.collage img:hover{transform:scale(1.05);box-shadow:0 12px 30px rgba(0,0,0,0.4)}
+
+/* divider */
+.divider{
+  width:80%;
+  margin:25px auto;
+  height:3px;
+  background:linear-gradient(90deg,#ffb300,#ff6f00,#ff8a80);
+  border-radius:5px;
+  box-shadow:0 0 12px rgba(255,193,7,0.8);
+}
+
+/* description */
+.description{
+  text-align:center;
+  font-size:1.05rem;
+  color:#4b2e05;
+  max-width:900px;
+  margin:10px auto;
+  padding:15px 25px;
+  background:rgba(255,255,255,0.92);
+  border-radius:15px;
+  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  line-height:1.6;
+}
+.description strong{color:#b67a00}
+
+/* menu grid */
+.menu{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+  padding:40px 30px;
+}
+.item{
+  background:rgba(255,255,255,0.95);
+  border-radius:20px;
+  text-align:center;
+  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  transition:transform .3s ease;
+  overflow:hidden;
+}
+.item:hover{transform:translateY(-8px)}
+.item img{width:100%;height:200px;object-fit:cover}
+.item h3{color:#a66a00;margin:12px 0 6px}
+.item p{color:#6d4c41;padding:0 12px;font-size:0.95rem}
+.item .price{display:block;margin:8px 0;font-weight:700}
+.item button{
+  background:linear-gradient(90deg,#ffb300,#ff6f00);
+  color:#fff;border:0;border-radius:8px;padding:8px 14px;margin-bottom:16px;cursor:pointer;font-weight:600;
+  transition:transform .15s,box-shadow .15s;
+}
+.item button:hover{transform:scale(1.04);box-shadow:0 4px 10px rgba(255,193,7,0.35)}
+
+/* reviews */
+.reviews{
+  background:rgba(255,255,255,0.95);
+  border-radius:20px;
+  padding:34px 20px;
+  margin:36px auto;
+  max-width:950px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.18);
+}
+.reviews h2{text-align:center;color:#a66a00;margin-bottom:16px;text-shadow:0 0 6px #ffe082}
+
+/* cart */
+.cart{
+  background:rgba(255,255,255,0.95);
+  border-radius:20px;
+  padding:34px 20px;
+  margin:36px auto 80px auto;
+  max-width:950px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.18);
+}
+.cart h2{color:#a66a00;margin-bottom:16px;text-align:center;text-shadow:0 0 6px #ffe082}
+.customer-info{background:rgba(255,248,225,0.95);border-radius:12px;padding:12px;margin-bottom:20px;box-shadow:inset 0 0 12px rgba(255,193,7,0.2)}
+.customer-info input,.customer-info textarea{width:100%;margin:6px 0;padding:10px;border-radius:8px;border:1px solid #ccc;font-family:inherit}
+table{width:100%;border-collapse:collapse;margin-top:12px}
+th,td{padding:10px;text-align:center;border-bottom:1px solid #ddd}
+th{background:#ffe082;color:#5a3600}
+.bill-summary{text-align:right;margin-top:16px;font-weight:600;color:#4b2e05}
+.bill-summary hr{border:1px solid #ffcc80;margin:8px 0}
+#total{color:#a66a00;font-size:1.2rem;text-shadow:0 0 6px #ffeb99}
+
+/* footer */
+.footer{ text-align:center;padding:18px;color:#555;background:rgba(255,255,255,0.9);margin-top:24px;border-top:3px solid #ffb300}
+@media (max-width:600px){
+  .collage{grid-template-columns:1fr; padding:30px 16px}
+  .menu{padding:24px 16px; gap:20px}
+}
+</style>
+</head>
+<body>
+
+<header>🍪 Cookie King – Royal Motion Edition 👑</header>
+
+<!-- collage 2x2 -->
+<div class="collage">
+  <img src="https://i.ibb.co/PGWLS1Qz/image-search-1762075006776.jpg" alt="cookie1">
+  <img src="https://i.ibb.co/Mx5J7nPS/image-search-1762075041452.jpg" alt="cookie2">
+  <img src="https://i.ibb.co/RpWRK5Fm/image-search-1762075020504.jpg" alt="cookie3">
+  <img src="https://i.ibb.co/y7N71N7/image-search-1762075058828.jpg" alt="cookie4">
+</div>
+
+<div class="divider"></div>
+
+<div class="description">
+  <p>Welcome to <strong>Cookie King – Royal Motion Edition</strong>! 🍪 We blend rich cocoa, creamy butter, and golden caramel to bake royal perfection. Every bite brings warmth, sweetness, and happiness straight from our ovens. Discover flavors that melt hearts and turn every cookie moment into a celebration.</p>
+</div>
+
+<div class="divider"></div>
+
+<!-- menu -->
+<section class="menu" id="menu"></section>
+
+<!-- reviews -->
+<section class="reviews">
+  <h2>💬 Customer Reviews</h2>
+  <div style="text-align:center;margin-bottom:16px">
+    <label for="reviewName" style="font-weight:600;color:#5a3600">Your Name:</label><br>
+    <input id="reviewName" type="text" placeholder="Enter your name" style="padding:8px;width:60%;margin-top:6px;border-radius:8px;border:1px solid #ccc"><br><br>
+
+    <label style="font-weight:600;color:#5a3600">Your Rating:</label><br>
+    <div id="starContainer" style="font-size:1.6rem;cursor:pointer;color:#ccc;display:inline-block">
+      <span onclick="setStar(1)">★</span>
+      <span onclick="setStar(2)">★</span>
+      <span onclick="setStar(3)">★</span>
+      <span onclick="setStar(4)">★</span>
+      <span onclick="setStar(5)">★</span>
+    </div><br><br>
+
+    <textarea id="reviewText" rows="3" placeholder="Write your comment here..." style="width:80%;padding:10px;border-radius:10px;border:1px solid #ccc;font-family:'Poppins',sans-serif"></textarea><br><br>
+
+    <button onclick="submitReview()" style="background:linear-gradient(90deg,#ffb300,#ff6f00);color:#fff;border:0;border-radius:8px;padding:10px 16px;font-weight:600;cursor:pointer">Submit Review</button>
+  </div>
+
+  <hr style="border:1px solid #ffcc80;margin:18px 0">
+  <div id="reviewList" style="text-align:left;padding:0 10px"></div>
+</section>
+
+<!-- cart -->
+<section class="cart">
+  <h2>Your Royal Bill</h2>
+
+  <div class="customer-info">
+    <h3 style="color:#b67a00;margin-bottom:8px">Customer Information</h3>
+    <input id="custName" type="text" placeholder="Full Name" required>
+    <textarea id="custAddress" rows="2" placeholder="Full Address" required></textarea>
+    <input id="custEmail" type="email" placeholder="Email ID" required>
+    <input id="custPhone" type="tel" placeholder="Phone Number" required>
+  </div>
+
+  <table id="cart-table">
+    <thead><tr><th>Item</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr></thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="bill-summary">
+    <p id="subtotal"></p>
+    <p id="gst"></p>
+    <p id="delivery"></p>
+    <hr>
+    <p id="total"></p>
+  </div>
+
+  <div style="text-align:center;margin-top:12px">
+    <button onclick="checkout()" style="background:linear-gradient(90deg,#ffb300,#ff6f00);color:#fff;border:0;border-radius:8px;padding:10px 18px;font-weight:700;cursor:pointer">Checkout</button>
+  </div>
+</section>
+
+<div class="footer">© 2025 Cookie King Bakery | Baked with ❤️ by Bhalani Hari Virendrabhai</div>
+
+<script>
+/* items */
+const cookies = [
+  { name: "Classic Choco Chip", desc: "Crispy edges, gooey heart, pure love.", price: 129, img: "https://i.ibb.co/PG2ZJv6z/image-search-1762075633338.jpg" },
+  { name: "Oat & Honey", desc: "Healthy, chewy, golden sweetness.", price: 139, img: "https://i.ibb.co/qYwLhxBn/image-search-1762075934092.jpg" },
+  { name: "Hazelnut Heaven", desc: "Nutty, creamy, dream cookie.", price: 149, img: "https://i.ibb.co/F4dpvdpT/image-search-1762076093217.jpg" },
+  { name: "Double Cocoa", desc: "Rich cocoa inside out.", price: 159, img: "https://i.ibb.co/ZDTQ6LX/image-search-1762076196502.jpg" },
+  { name: "Red Velvet Bite", desc: "Luxury in every bite.", price: 169, img: "https://i.ibb.co/BVQsWHyd/image-search-1762076426061.jpg" },
+  { name: "Peanut Butter Bliss", desc: "Soft, salty-sweet, nut lover’s dream.", price: 149, img: "https://i.ibb.co/BKGyMqwN/image-search-1762076511891.jpg" },
+  { name: "White Choco Almond", desc: "Sweet white magic.", price: 179, img: "https://i.ibb.co/PGPdWTdP/image-search-1762076591305.jpg" },
+  { name: "Dark Royale", desc: "Bittersweet power cookie.", price: 189, img: "https://i.ibb.co/V0czgXwZ/image-search-1762076668512.jpg" },
+  { name: "Mint Chip Crunch", desc: "Refreshing bite of mint & cocoa.", price: 159, img: "https://i.ibb.co/ZRQDfhmd/image-search-1762076758558.jpg" },
+  { name: "Caramel Lava", desc: "Melting caramel core inside soft dough.", price: 199, img: "https://i.ibb.co/Y4K9nBNf/image-search-1762076838292.jpg" }
+];
+
+/* render menu */
+const menu = document.getElementById('menu');
+cookies.forEach((cookie, i) => {
+  const item = document.createElement('div');
+  item.className = 'item';
+  item.innerHTML = `
+    <img src="${cookie.img}" alt="${cookie.name}">
+    <h3>${cookie.name}</h3>
+    <p>${cookie.desc}</p>
+    <span class="price">₹${cookie.price}</span>
+    <button onclick="addToCart(${i})">Add to Cart</button>
+  `;
+  menu.appendChild(item);
+});
+
+/* cart logic */
+let cart = [];
+function addToCart(i){
+  const product = cookies[i];
+  const found = cart.find(x => x.name === product.name);
+  if(found) found.qty++;
+  else cart.push({ ...product, qty: 1 });
+  updateCart();
+}
+function changeQty(idx, delta){
+  cart[idx].qty += delta;
+  if(cart[idx].qty <= 0) cart.splice(idx,1);
+  updateCart();
+}
+function updateCart(){
+  const tbody = document.querySelector('#cart-table tbody');
+  tbody.innerHTML = '';
+  let subtotal = 0;
+  cart.forEach((c, idx) => {
+    const sub = c.qty * c.price;
+    subtotal += sub;
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${c.name}</td>
+      <td><button onclick="changeQty(${idx},-1)">−</button> ${c.qty} <button onclick="changeQty(${idx},1)">+</button></td>
+      <td>₹${c.price}</td>
+      <td>₹${sub.toFixed(2)}</td>
+    `;
+    tbody.appendChild(row);
+  });
+  const gst = subtotal * 0.05;
+  const delivery = subtotal > 0 ? 49 : 0;
+  const total = subtotal + gst + delivery;
+  document.getElementById('subtotal').textContent = "Subtotal: ₹" + subtotal.toFixed(2);
+  document.getElementById('gst').textContent = "GST (5%): ₹" + gst.toFixed(2);
+  document.getElementById('delivery').textContent = "Delivery Charge: ₹" + delivery.toFixed(2);
+  document.getElementById('total').textContent = "Grand Total: ₹" + total.toFixed(2);
+}
+
+/* checkout */
+function checkout(){
+  const name = document.getElementById('custName').value.trim();
+  const address = document.getElementById('custAddress').value.trim();
+  const email = document.getElementById('custEmail').value.trim();
+  const phone = document.getElementById('custPhone').value.trim();
+  if(!name || !address || !email || !phone){
+    alert('Please fill all customer details before checkout!');
+    return;
+  }
+  if(cart.length === 0){
+    alert('Your cart is empty!');
+    return;
+  }
+  // simple confirmation
+  alert(`Thank you ${name} for ordering from Cookie King 🍪!\n\nTotal: ${document.getElementById('total').textContent}\n\nYour order will be delivered to:\n${address}`);
+  cart = [];
+  updateCart();
+  // clear customer inputs (optional)
+  // document.getElementById('custName').value = '';
+}
+
+/* Reviews (single shared section) */
+let userRating = 0;
+function setStar(star){
+  userRating = star;
+  const stars = document.querySelectorAll('#starContainer span');
+  stars.forEach((s, idx) => s.style.color = idx < star ? '#ffb300' : '#ccc');
+}
+function submitReview(){
+  const name = document.getElementById('reviewName').value.trim();
+  const text = document.getElementById('reviewText').value.trim();
+  const list = document.getElementById('reviewList');
+  if(!name || !text || userRating === 0){
+    alert('Please enter your name, write a comment, and select a rating.');
+    return;
+  }
+  const starHTML = "★".repeat(userRating) + "☆".repeat(5 - userRating);
+  const wrapper = document.createElement('div');
+  wrapper.style.marginBottom = '14px';
+  wrapper.innerHTML = `
+    <p><strong style="color:#a66a00">${escapeHtml(name)}</strong> &nbsp; <span style="color:#ffb300">${starHTML}</span></p>
+    <p style="color:#4b2e05;margin-top:6px">${escapeHtml(text)}</p>
+    <hr style="border:0.5px solid #ffe082;margin-top:8px">
+  `;
+  list.prepend(wrapper);
+  // reset inputs
+  document.getElementById('reviewName').value = '';
+  document.getElementById('reviewText').value = '';
+  setStar(0);
+  userRating = 0;
+  alert('Thank you for your feedback! 🍪');
+}
+
+/* small helper to avoid accidental html injection in reviews */
+function escapeHtml(str){
+  return str.replace(/[&<>"'`=\/]/g, function(s){return({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;','/':'&#47;','`':'&#96;','=':'&#61;'})[s];});
+}
+</script>
+</body>
+</html>
